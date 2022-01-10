@@ -4,12 +4,12 @@
 		<div th:replace="fragments/resources :: head"></div>
 		<title>Aggiungi Pizza</title>
 	</head>
-	<body>
+	<body style="background-image:url(https://www.damacapricciosa.it/wp-content/uploads/2015/12/sfondo-pizza.jpg);">
 		<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
 		<div class="container">
-			<h1 class="fs-1 fw-bold text-center p-3">Pizza</h1 >
-			<hr/>
-			
+			<h1 class="fs-1 fw-bold text-center p-3 text-light">PIZZA</h1 >
+			<p class="text-light text-center">Aggiungi la tua pizza a piacimento e ricordati di essere creativo</p> 
+						
 			<form
 				id="pizza-form"
 				th:object="${pizza}"
@@ -17,21 +17,23 @@
 				method="post"
 			>
 				<div class="row gy-3">
-					<div class="col-6">
+					<div class="col-6 text-light">
 						<label class="form-label" for="nome">Nome</label>
 						<input type="text" class="form-control" id="nome" placeholder="Inserire il nome della pizza" th:field="*{nome}" required>
 					</div >
-					<div class="col-6">
+					<div class="col-6 text-light">
 						<label class="form-label" for="prezzo">Prezzo</label>
 						<input type="text" class="form-control" id="prezzo" placeholder="Inserire il prezzo della pizza" th:field="*{prezzo}" required>
 					</div >
-					<div class="col-12">
+					<div class="col-12 text-light">
 						<label class="form-label" for="descrizione">Descrizione</label>
-						<input type="text" class="form-control" id="descrizione" placeholder="Inserire la descrizione della pizza" th:field="*{descrizione}">
+						<textarea class="form-control" id="descrizione" rows="4" placeholder="Inserire la descrizione della pizza" th:field="*{descrizione}"></textarea>
 					</div >
 					<div class="col-12">
-					<button class="btn btn-primary" type="submit">Salva</button>
+					<button class="btn btn-info fw-bold" type="submit">Salva</button>
 					</div>
 				</div >
-			</form
->
+			</form>
+		</div>
+	</body>
+</html>
