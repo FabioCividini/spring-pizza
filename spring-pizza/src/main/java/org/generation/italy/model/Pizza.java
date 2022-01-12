@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Pizza {
@@ -17,9 +19,11 @@ public class Pizza {
 	private Integer id;
 	
 	@NotNull
+	@NotEmpty(message="Il nome è obbligatorio")
 	private String nome;
 	
 	@NotNull
+	@Size(min=1, max=250, message="La descrizione deve essere lungha al massimo 250 caratteri")
 	private String descrizione;
 	
 	@NotNull

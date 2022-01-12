@@ -14,7 +14,7 @@ public class Ingrediente {
 	private Integer id;
 	
 	@NotNull
-	private String nome;
+	private String ingrediente;
 
 	
 	public Integer getId() {
@@ -25,12 +25,12 @@ public class Ingrediente {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getIngrediente() {
+		return ingrediente;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setIngrediente(String ingrediente) {
+		this.ingrediente = ingrediente;
 	}
 	
 	

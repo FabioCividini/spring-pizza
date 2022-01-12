@@ -8,23 +8,28 @@
 		<nav th:replace="fragments/navbar :: navbar('books')"></nav>
 		<div class="container">
 			<h1 class="fs-1 fw-bold text-center p-3 text-light">MENU PIZZE</h1 >
-			
-			
+			<hr>
+			<div class="mb-3 mt-2">
+				<a class="btn btn-info fw-bold" th:href="@{/pizza/create}"><i class="fas fa-plus"></i> Aggiungi Pizza</a>
+			</div >
 			<table class="table" th:if="${list.size() > 0}">
 				<thead>
 					<tr class="bg-secondary shadow-lg">
 						<th class="text-light">Nome</th  >
 						<th class="text-light">Descrizione</th  >
-						<th class="text-light">Ingredienti</th  >
-						<th class="text-light">Prezzo(€)</th  >
+						<th class="text-light text-center">Prezzo(€)</th  >
+						<th></th>
 					</tr  >
 				</thead >
 				<tbody>
 					<tr th:each="item : ${list}">
 						<td class="text-light" th:text="${item.nome}"></td>
 						<td class="text-light" th:text="${item.descrizione}"></td>
-						<td class="text-light" th:text="${item.ingredienti}"></td >
-						<td class="text-light" th:text="${item.prezzo}"></td >
+						<td class="text-light text-center" th:text="${item.prezzo}"></td >
+						<td class="text-center">
+							<a class="btn btn-info fw-bold" th:href="@{|/pizza/edit/${item.id}|}"><i class="fas fa-edit"></i></a>
+							<a class="btn btn-info fw-bold" th:href="@{|/pizza/delete/${item.id}|}" onclick="return confirm('Sei sicuro di voler cancellare questa pizza?')"><i class="fas fa-trash-alt"></i></a>
+						</td >
 					</tr>
 				</tbody>
 			</table>
