@@ -1,5 +1,6 @@
 package org.generation.italy.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class Pizza {
 	private String descrizione;
 	
 	@NotNull
-	private Integer prezzo;
+	private BigDecimal prezzo;
 	
 	@ManyToMany
 	private List<Ingrediente> ingredienti;
@@ -57,11 +58,11 @@ public class Pizza {
 		this.descrizione = descrizione;
 	}
 
-	public Integer getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(Integer prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo = prezzo;
 	}
 

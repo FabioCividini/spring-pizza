@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="fragments/resources :: head"></div>
+		<title th:text="${pizza.nome}"></title>
+	</head>
+	<body style="background-image:url(https://www.damacapricciosa.it/wp-content/uploads/2015/12/sfondo-pizza.jpg);">
+		<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
+		<div class="container" th:object="${pizza}">
+			<h1 class="text-center p-2 text-light fw-bold" th:text="*{nome}"></h1>
+			<hr style="color: white; ">
+			<div class="row justify-content-center gy-2">
+				<div class="col-8 d-flex">
+					<div class="col-6">
+						<dl>
+							<dt><h5 class="text-light fw-bold">Descrizione:</h5></dt >
+							<dd class="text-light" th:text="*{descrizione}"></dd>
+							<dt><h5 class="text-light fw-bold">Prezzo(€):</h5></dt >
+							<dd class="text-light" th:text="|*{prezzo}&#8364;|"></dd>
+						</dl>
+					</div>
+					<div class="col-6">
+						<h5 class="text-light fw-bold">Ingredienti:</h5>
+						<ul>
+							<li class="text-light" th:each="ing : *{ingredienti}" th:text="${ing.ingrediente}"></li> 
+						</ul> 
+					</div>
+				</div >
+			</div>
+			<hr style="color: white; ">
+			
+			<div class="text-center">
+				<a class="btn btn-info fw-bold" th:href="@{/pizza}"><i class="fas fa-undo-alt"></i> Torna alla lista</a>
+			</div >
+
+		</div>
+		<div th:replace="fragments/resources :: scripts"></div>
+	</body >
+</html>

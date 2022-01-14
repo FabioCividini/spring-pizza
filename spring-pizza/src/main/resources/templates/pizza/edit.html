@@ -2,48 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<div th:replace="fragments/resources :: head"></div>
-		<title>Aggiungi Pizza</title>
+		<title th:text="${edite} ? 'Edit' : 'Create'"></title >
 	</head>
 	<body style="background-image:url(https://www.damacapricciosa.it/wp-content/uploads/2015/12/sfondo-pizza.jpg);">
 		<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
 		<div class="container">
 			<h1 class="fs-1 fw-bold text-center p-3 text-light">PIZZA</h1 >
 			<p class="text-light text-center">Aggiungi la tua pizza a piacimento</p> 
-						
+			<hr style="color: white; ">
+			
 			<form
 				id="pizza-form"
-				th:object="${pizza}"
-				th:action="@{/pizza/create}"
+				th:object="${pizzaObj}"
+				th:action="${edit} ? @{/pizza/edit/{id}(id=${pizzaObj.id})} : @{/pizza/create}"
 				method="post"
 			>
-			<div class="row">
-				<div class="col-8">
-					<div class="row gy-3">
-						<div class="col-6 text-light">
-							<label class="form-label" for="nome">Nome</label>
+			<div class="row justify-content-center">
+			
+				<div class="col-6">
+					<div class="d-flex">
+						<div class="col-6 text-light p-2">
+							<label class="form-label" for="nome"><h4 class="text-light">Nome:</h4></label>
 							<input type="text" class="form-control" id="nome" placeholder="Inserire il nome della pizza" th:field="*{nome}" required>
 						</div >
-						<div class="col-6 text-light">
-							<label class="form-label" for="prezzo">Prezzo</label>
+						<div class="col-6 text-light p-2">
+							<label class="form-label" for="prezzo"><h4 class="text-light">Prezzo(€):</h4></label>
 							<input type="text" class="form-control" id="prezzo" placeholder="Inserire il prezzo della pizza" th:field="*{prezzo}" required>
 						</div >
-						<div class="col-12 text-light">
-							<label class="form-label" for="descrizione">Descrizione</label>
-							<textarea class="form-control" id="descrizione" rows="4" placeholder="Inserire la descrizione della pizza" th:field="*{descrizione}"></textarea>
-						</div >
-						<div class="col-12">
-							<button class="btn btn-info fw-bold" type="submit"><i class="fas fa-check"></i> Salva</button>
-							<a class="btn btn-info fw-bold" th:href="@{/pizza}"><i class="fas fa-times"></i> Cancel</a>
-						</div>
 					</div >
-				</div>
-				<div class="col-4">
-					<h5 class="text-center text-light">Ingredienti:</h5>
-					<div class="form-check d-flex" th:each="ing : ${ingredienteList}">
-						  <input class="form-check-input" type="checkbox" th:id="|ingrediente_${ing.id}|" th:value="${ing.id}" th:field="*{ingredienti}">
-						  <label class="form-check-label text-light ps-1" th:for="|ingrediente_${ing.id}|" th:text="${ing.ingrediente}"></label>
+					
+					<div class="col-12 text-light p-2">
+						<label class="form-label" for="descrizione"><h4 class="text-light">Descrizione:</h4></label>
+						<textarea class="form-control" id="descrizione" rows="3" placeholder="Inserire la descrizione della pizza" th:field="*{descrizione}"></textarea>
+					</div >
+					<div class="col-12 p-2">
+						<h4 class="text-light mb-3">Ingredienti:</h4>
+						<div class="form-check d-flex" th:each="ing : ${ingredienteList}">
+							  <input class="form-check-input" type="checkbox" th:id="|ingrediente_${ing.id}|" th:value="${ing.id}" th:field="*{ingredienti}">
+							  <label class="form-check-label text-light ps-1" th:for="|ingrediente_${ing.id}|" th:text="${ing.ingrediente}"></label>
+						</div>
+					</div>
+					<div class="col-12 p-2 mb-2 text-center">
+						<button class="btn btn-info fw-bold" type="submit"><i class="fas fa-check"></i> Salva</button>
+						<a class="btn btn-info fw-bold" th:href="@{/pizza}"><i class="fas fa-times"></i> Cancel</a>
 					</div>
 				</div>
+				
 			</div  >
 			</form>
 		</div>

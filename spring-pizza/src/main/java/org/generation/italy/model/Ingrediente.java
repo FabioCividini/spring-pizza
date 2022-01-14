@@ -33,5 +33,8 @@ public class Ingrediente {
 		this.ingrediente = ingrediente;
 	}
 	
+	public String toString() {
+		return ingrediente; 
+	}
 	
 }
