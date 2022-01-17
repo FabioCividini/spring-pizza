@@ -23,11 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/pizza")
 public class PizzaController {
 
+	
 	@Autowired
 	private PizzaService service;
 	
+	
 	@Autowired
 	private IngredienteService ingredienteService;
+	
 	
 	@GetMapping
 	public String list(Model model, @RequestParam(name="keyword", required=false) String keyword) {
@@ -42,11 +45,13 @@ public class PizzaController {
 		return "/pizza/list";
 	}
 	
+	
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Integer id , Model model) {
 		model.addAttribute("pizza", service.getById(id));
 		return "/pizza/detail";
 	}
+	
 	
 	@GetMapping("/create")
 	public String create(Model model) {
@@ -56,8 +61,9 @@ public class PizzaController {
 		return "/pizza/edit";
 	}
 	
+	
 	@PostMapping("/create")
-	public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model,  RedirectAttributes redirectAttributes) {
+	public String doCreate(@Valid @ModelAttribute("pizzaObj") Pizza formPizza, BindingResult bindingResult, Model model,  RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("edit", false);
 			model.addAttribute("ingredienteList", ingredienteService.findAllSortByIngrediente());
@@ -69,6 +75,7 @@ public class PizzaController {
 		return "redirect:/pizza";
 	}
 	
+	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("edit", true);
@@ -76,6 +83,7 @@ public class PizzaController {
 		model.addAttribute("ingredienteList", ingredienteService.findAllSortByIngrediente());
 		return "/pizza/edit";
 	}
+	
 	
 	@PostMapping("/edit/{id}")
 	public String doUpdate(@Valid @ModelAttribute("pizza") Pizza formPizza, 
@@ -91,10 +99,12 @@ public class PizzaController {
 		return "redirect:/pizza";
 	}
 	
+	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		service.deleteById(id);
 		redirectAttributes.addFlashAttribute("successMessage", "Hai eliminato una pizza dalla lista!");
 		return "redirect:/pizza";
 	}
+	
 }

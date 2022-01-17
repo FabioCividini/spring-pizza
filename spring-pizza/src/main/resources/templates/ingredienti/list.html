@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="fragments/resources :: head"></div>
+		<title>Ingredienti</title>
+	</head>
+	<body class="img-fluid" style="background-image:url(https://www.damacapricciosa.it/wp-content/uploads/2015/12/sfondo-pizza.jpg);">
+		<nav th:replace="fragments/navbar :: navbar('books')"></nav>
+		
+		<div class="container-fluid">
+			
+			<h1 class="fs-1 fw-bold text-center p-3 text-light">Lista ingredienti</h1 >
+			<hr style="color: white; ">
+			
+			<div class="mb-3 p-3 d-flex justify-content-between">
+				<a class="btn btn-info fw-bold" th:href="@{/ingredienti/create}"><i class="fas fa-plus"></i> Aggiungi ingrediente</a>
+				<form th:action="@{/ingredienti}" method="get">
+			        <div class="input-group">
+			        	<input name="keyword" th:value="${keyword}" class="form-control" type="search" placeholder="Ricerca" aria-label="Search">
+			        	<button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
+			     	</div>
+			     </form>
+			</div >
+			
+			<div class="row justify-content-center" th:if="${list.size() > 0}">
+				<div class="col-6">
+					<ul th:each="item : ${list}">
+						<li class="text-light d-flex justify-content-between">
+							<span th:text="|&#8226; ${item.ingrediente}|"></span>
+							<span>
+								<a class="btn btn-info" th:href="@{|/ingredienti/edit/${item.id}|}"><i class="fas fa-edit"></i></a>
+								<a class="btn btn-info" th:href="@{|/ingredienti/delete/${item.id}|}" onclick="return confirm('Sei sicuro di voler cancellare questo ingrediente?')"><i class="fas fa-trash-alt"></i></a>
+							</span>
+						</li >
+						<hr style="color: white; ">
+					</ul >
+				</div >
+			</div >
+			
+			<div class="alert alert-warning text-dark fw-bold" role="alert" th:unless="${list.size() > 0}">
+				  Non ci sono ingredienti disponibili
+			</div>
+		</div >
+		
+	</body >
+</html>

@@ -17,4 +17,25 @@ public class IngredienteService {
 	public List<Ingrediente> findAllSortByIngrediente(){
 		return repository.findAll(Sort.by("ingrediente"));
 	}
+	
+	public List<Ingrediente> findByKeywordSortedByRecent(String keyword){
+		return repository.findByIngredienteContainingIgnoreCaseOrderByIngrediente(keyword);
+	}
+	
+	public Ingrediente create(Ingrediente ingrediente) {
+		return repository.save(ingrediente);
+	}
+	
+	public Ingrediente getById(Integer id) {
+		return repository.getById(id);
+	}
+	
+	public Ingrediente update(Ingrediente ingrediente) {
+		return repository.save(ingrediente);
+	}
+	
+	public void deleteById(Integer id) {
+		repository.deleteById(id);
+	}
+	
 }

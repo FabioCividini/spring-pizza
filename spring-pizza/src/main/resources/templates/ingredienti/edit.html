@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="fragments/resources :: head"></div>
+		<title th:text="${edite} ? 'Modifica' : 'Crea'"></title >
+	</head>
+	<body class="img-fluid" style="background-image:url(https://www.damacapricciosa.it/wp-content/uploads/2015/12/sfondo-pizza.jpg);">
+		<nav th:replace="fragments/navbar :: navbar('books')"></nav>
+		
+		<div class="container">
+			<h3 class="fs-1 fw-bold text-center p-3 text-light" th:text="${edit} ? 'Modifica ingrediente' : 'Crea un ingrediente'"></h3 >
+			<hr style="color: white; ">
+			
+			<form
+				id="ingrediente-form"
+				th:object="${ingredienteObj}"
+				th:action="${edit} ? @{/ingredienti/edit/{id}(id=${ingredienteObj.id})} : @{/ingredienti/create}"
+				method="post"
+			>
+				<div class="row justify-content-center">
+					<div class="col-4 text-light p-2 text-center">
+						<label class="form-label" for="ingrediente"><h4 class="text-light">Nome ingrediente:</h4></label>
+						<input type="text" class="form-control" id="ingrediente" placeholder="Inserire il nome dell'ingrediente" th:field="*{ingrediente}" required>
+						<button class="btn btn-info fw-bold m-3" type="submit"><i class="fas fa-check"></i> Salva</button>
+						<a class="btn btn-info fw-bold m-3" th:href="@{/ingredienti}"><i class="fas fa-times"></i> Cancel</a>
+					</div >
+				</div >
+			</form>
+		</div >
+
+	</body>
+</html>
